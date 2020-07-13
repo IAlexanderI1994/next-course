@@ -1,13 +1,19 @@
 import { useEffect } from 'react'
 import axios from 'axios'
 import Thumbnail from "../../components/Thumbnail"
+import Link from "next/link"
 
 const Home = ({ shows }) => {
+  console.log(shows)
   const renderShows = () => shows.map(({ show }, index) =>
-    (<li key={index}><Thumbnail imageUrl={show.image.medium} caption={show.name}/></li>))
+    (<li key={index}><Thumbnail imageUrl={show.image?.medium} caption={show.name}/></li>))
 
   return (
-    <ul>{renderShows()}</ul>
+    <div>
+      <Link href={'/about'}>About </Link>
+      <ul>{renderShows()}</ul>
+
+    </div>
   )
 }
 Home.getInitialProps = async (context) => {
