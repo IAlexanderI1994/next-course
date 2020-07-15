@@ -6,8 +6,8 @@ const Thumbnail = ({ imageUrl, caption }) => {
 
   return (
     <div className={'thumbnail'}>
-      <Link href={'/us/5617'}>
-        <a >
+      <Link href={'/[country]/[showId]'} as={'us/5617'}>
+        <a>
           <img src={imageUrl} className={'thumbnail__image'}/>
           <div className={'thumbnail__caption'}>{caption}</div>
         </a>

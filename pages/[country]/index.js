@@ -4,7 +4,6 @@ import Thumbnail from "../../components/Thumbnail"
 import Link from "next/link"
 
 const Home = ({ shows }) => {
-  console.log(shows)
   const renderShows = () => shows.map(({ show }, index) =>
     (<li key={index}><Thumbnail imageUrl={show.image?.medium} caption={show.name}/></li>))
 
