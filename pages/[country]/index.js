@@ -1,11 +1,14 @@
-import { useEffect } from 'react'
 import axios from 'axios'
 import Thumbnail from "../../components/Thumbnail"
 import Link from "next/link"
 
-const Home = ({ shows }) => {
+const Home = ({ shows, country }) => {
   const renderShows = () => shows.map(({ show }, index) =>
-    (<li key={index}><Thumbnail imageUrl={show.image?.medium} caption={show.name}/></li>))
+    (<li key={index}><Thumbnail
+      imageUrl={show.image?.medium}
+      href={'/[country]/[showId]'}
+      as={`/${country}/${show.id}`}
+      caption={show.name}/></li>))
 
   return (
     <div>
@@ -16,10 +19,11 @@ const Home = ({ shows }) => {
   )
 }
 Home.getInitialProps = async (context) => {
-  const { query } = context
-  const { data } = await axios.get(`http://api.tvmaze.com/schedule?country=${query.country}`)
+  const { query: { country = 'us' } } = context
+  const { data: shows } = await axios.get(`http://api.tvmaze.com/schedule?country=${country}`)
   return {
-    shows: data
+    shows,
+    country
   }
 }
 
